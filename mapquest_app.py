@@ -43,11 +43,13 @@ while True:
             print("Seasonal Closure:        Yes")
         accessRestriction = json_data["route"]["hasAccessRestriction"]   #Let the users know if there is Access Restriction
         if accessRestriction == 0:                   
-            print("Access Restriciton:      None")
+            print("Access Restriction:      None")
         else:
-            print("Access Restriciton:      Yes")
+            print("Access Restriction:      Yes")
         print("Destination Latitude:    " +  str(json_data["route"]["boundingBox"]["lr"]["lat"]))    
-        print("Destintaion Longitude:   " +  str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("Destination Longitude:   " +  str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("=============================================\n")
+        print("Type q if you want to exit.\n")
     elif json_status == 402:
         print("**********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
@@ -58,6 +60,6 @@ while True:
         print("**********************************************\n")
     else:
         print("************************************************************************")
-        print("For Staus Code: " + str(json_status) + "; Refer to:")
+        print("For Status Code: " + str(json_status) + "; Refer to:")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")
         print("************************************************************************\n")
