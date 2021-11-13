@@ -11,12 +11,12 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
-        
+       
     url = main_api + urllib.parse.urlencode({"key":key, "from":orig, "to":dest})
     print("URL: " + (url))
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
-        
+       
     if json_status == 0:
         print("API Status: " + str(json_status) + " = A successful route call.\n")
         print("=============================================")
@@ -42,22 +42,43 @@ while True:
         else:
             print("Seasonal Closure:        Yes")
         accessRestriction = json_data["route"]["hasAccessRestriction"]   #Let the users know if there is Access Restriction
-        if accessRestriction == 0:                   
-            print("Access Restriciton:      None")
+        if accessRestriction == 0:                  
+            print("Access Restriction:      None")
         else:
-            print("Access Restriciton:      Yes")
+            print("Access Restriction:      Yes")
+        unpaved = json_data["route"]["hasUnpaved"]
+        if unpaved == 0:                  
+            print("Unpaved Road:            None")
+        else:
+            print("Unpaved Road:            Yes")
+        countryCross = json_data["route"]["hasCountryCross]
+        if countryCross == 0:                  
+            print("Country Cross:           None")
+        else:
+            print("Country Cross:           Yes")
+        ferry = json_data["route"]["hasFerry"]
+        if ferry == 0:                  
+            print("Ferry:                   None")
+        else:
+            print("Ferry:                   Yes")
+
+        print("For more detailed information about ")
+
+   
         print("Destination Latitude:    " +  str(json_data["route"]["boundingBox"]["lr"]["lat"]))    
-        print("Destintaion Longitude:   " +  str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("Destination Longitude:   " +  str(json_data["route"]["boundingBox"]["lr"]["lng"]))
+        print("=============================================\n")
+        print("Type q if you want to exit.\n")
     elif json_status == 402:
-        print("**********************************************")
+        print("********************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
         print("**********************************************\n")
     elif json_status == 611:
-        print("**********************************************")
+        print("********************************************")
         print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
         print("**********************************************\n")
     else:
-        print("************************************************************************")
-        print("For Staus Code: " + str(json_status) + "; Refer to:")
+        print("**********************************************************************")
+        print("For Status Code: " + str(json_status) + "; Refer to:")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")
         print("************************************************************************\n")
